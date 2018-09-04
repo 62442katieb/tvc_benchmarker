@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+densityimport matplotlib.pyplot as plt
 import tvc_benchmarker
 import numpy as np
 import scipy.stats as sps
@@ -196,7 +196,7 @@ def plot_dfc_timeseries(dfc, limitaxis=500, cm='Set2', fig_dir = None, fig_prefi
         if mi_params == ():
             mi_params = np.arange(0,len(dfc))
 
-        fig,ax=plt.subplots(len(dfc.columns), 1, sharex=True,figsize=(5,len(dfc.columns)*2))
+        fig,ax=plt.subplots(len(dfc.columns), 1, sharex=True,sharey=True, figsize=(5,len(dfc.columns)*2))
 
         for i,dfc_method in enumerate(sorted(dfc.columns)):
 
@@ -258,7 +258,7 @@ def plot_betadfc_distribution(dfc, dat_dir, fig_dir = None, model_prefix=None, b
         for i,method in enumerate(sorted(dfc.columns)):
             beta_dfc=tvc_benchmarker.load_bayes_model(dat_dir,model_prefix + 'method-' + method + param_sname)[0][burn:].get_values('beta')
             #Plot
-            ltmp = ax[i].hist(beta_dfc,np.arange(-1,1,0.001),histtype='stepfilled',color=colormap(i),normed=True,alpha=0.4, linewidth=2,label=method)
+            ltmp = ax[i].hist(beta_dfc,np.arange(-1,1,0.001),histtype='stepfilled',color=colormap(i),density=True,alpha=0.4, linewidth=2,label=method)
             lines.append(ltmp)
             ax[i].set_yticklabels([])
             ax[i].set_ylabel(method)

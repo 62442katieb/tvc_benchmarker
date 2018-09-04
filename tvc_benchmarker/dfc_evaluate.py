@@ -130,7 +130,7 @@ def calc_waic(dfc,model_dir,save_dir,file_prefix=None,mi='alpha',burn=1000):
         for i,method in enumerate(dfc.columns):
             file_name = file_prefix + 'method-' + method + param_sname
             tm=tvc_benchmarker.load_bayes_model(model_dir,file_name)
-            waic[i,:] = np.array(pm.stats.waic(tm[0][burn:],tm[1]))
+            waic[i,:] = np.array(pm.stats.waic(tm[0][burn:],tm[1])[0:3])
 
         odr=np.argsort(waic[:,0])
         delta_waic = waic[:,0]-waic[odr[0],0]
